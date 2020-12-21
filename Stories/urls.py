@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from users import views as user_view
-
+from django.views.static import serve
+from django.conf.urls import url
 from django.contrib.auth import views as auth_view
 
 urlpatterns = [
@@ -26,4 +27,6 @@ urlpatterns = [
     path('profile/', user_view.profile, name='profile'),
     path('login/', auth_view.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_view.LoginView.as_view(template_name='users/logout.html'), name='logout'),
+    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}), 
+    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]
