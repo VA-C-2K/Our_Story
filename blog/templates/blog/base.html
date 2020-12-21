@@ -1,0 +1,71 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <link rel="stylesheet" href="{%static 'blog/main.css'%}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>{% block title %} {% endblock title %}</title>
+  </head>
+  <body>
+    <div class="header">
+        <ul class="menu">
+            <li><span></span><a href="{%url 'home'%}"><h1 class="display-6">Home</h1></a></li>
+            {%if user.is_authenticated%}
+            <li><span></span><a href="{%url 'logout'%}"><h1 class="display-6">Logout</h1></a></li>
+            <li><span></span><a href="{%url 'profile'%}"><h1 class="display-6">Profile</h1></a></li>
+            <li><span></span><a href="{%url 'post-create'%}"><h1 class="display-6">Create Post</h1></a></li>
+            {%else%}
+            <li><span></span><a href="{%url 'register'%}"><h1 class="display-6">Register</h1></a></li>
+            <li><span></span><a href="{%url 'login'%}"><h1 class="display-6">Login</h1></a></li>
+            {%endif%}
+            
+        </ul>
+        <div class="hamburger close">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="home">
+        <h1 class="display-2">Welcome to Our Story</h1>
+    </div>
+   
+            
+    <script>
+        let toggle = false;
+        const hamburger = document.querySelector('.hamburger');
+        const menu = document.querySelector('.menu');
+        hamburger.addEventListener('click', ()=>{
+            if(!toggle){
+                hamburger.classList.remove('close');
+                hamburger.classList.add('open');
+                menu.style.visibility = "visible";
+                toggle = true;
+            }
+            else{
+                hamburger.classList.remove('open');
+                hamburger.classList.add('close');
+                menu.style.visibility = "hidden";
+                toggle = false
+            }
+        })
+    </script>
+    <div class="container">
+        {% block content %}
+      
+        {% endblock content %}
+    </div>
+    
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
